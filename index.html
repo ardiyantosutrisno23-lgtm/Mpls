@@ -1,0 +1,879 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netizen Survival: SMK Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden pb-6">
+
+    <!-- Header / Navbar -->
+    <header class="w-full max-w-4xl mx-auto px-4 py-4 flex justify-between items-center border-b border-slate-800">
+        <div class="flex items-center gap-2">
+            <div class="bg-indigo-600 p-2 rounded-lg text-white animate-pulse">
+                <i class="fa-solid fa-shield-halved text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-bold tracking-wider text-indigo-400">NETIZEN SURVIVAL</h1>
+                <p class="text-xs text-slate-400">Edisi Spesial PLS SMK</p>
+            </div>
+        </div>
+        <div class="text-right">
+            <span class="text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700">
+                <i class="fa-solid fa-graduation-cap text-indigo-400 mr-1"></i> MPLS Interaktif
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="w-full max-w-2xl glass-card rounded-2xl shadow-2xl p-6 md:p-8 relative overflow-hidden">
+            
+            <!-- DECORATIVE BG ELEMENTS -->
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-500 rounded-full blur-3xl opacity-20 pointer-events-none"></div>
+
+            <!-- SCREEN 1: WELCOME SCREEN -->
+            <div id="screen-welcome" class="space-y-6">
+                <div class="text-center space-y-3">
+                    <span class="px-3 py-1 bg-indigo-500/10 text-indigo-300 text-xs font-semibold rounded-full border border-indigo-500/20">GAME INTERAKTIF MPLS</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 leading-tight">
+                        Apakah Kamu Netizen yang Aman & Pintar?
+                    </h2>
+                    <p class="text-slate-300 text-sm md:text-base max-w-md mx-auto">
+                        Di dunia SMK, akun sosial mediamu adalah portofolio pertamamu. Mainkan simulasi ini dan buktikan kamu siap menghadapi dunia digital tanpa terjebak bahayanya!
+                    </p>
+                </div>
+
+                <div class="space-y-4 max-w-sm mx-auto">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Nama Lengkap Siswa Baru:</label>
+                        <input type="text" id="player-name" placeholder="Masukkan namamu..." class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-center font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">Pilih Jurusan SMK:</label>
+                        <select id="player-major" class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all font-semibold">
+                            <option value="Rekayasa Perangkat Lunak (RPL)">💻 Rekayasa Perangkat Lunak (RPL)</option>
+                            <option value="Teknik Komputer & Jaringan (TKJ)">🔌 Teknik Komputer & Jaringan (TKJ)</option>
+                            <option value="Akuntansi & Keuangan (AKL)">📊 Akuntansi & Keuangan (AKL)</option>
+                            <option value="Bisnis Digital (BD)">🛒 Bisnis Digital (BD)</option>
+                            <option value="Desain Komunikasi Visual (DKV)">🎨 Desain Komunikasi Visual (DKV)</option>
+                            <option value="Teknik Otomotif (TO)">🔧 Teknik Otomotif (TO)</option>
+                            <option value="Lainnya">🏫 Jurusan Lainnya</option>
+                        </select>
+                    </div>
+
+                    <button onclick="startGame()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transform hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 text-lg">
+                        Mulai Simulasi <i class="fa-solid fa-circle-play"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: STORY & DECISION ENGINE -->
+            <div id="screen-game" class="hidden space-y-6">
+                <!-- Status bar -->
+                <div class="grid grid-cols-3 gap-2 bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-center">
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">👤 Jejak Digital</p>
+                        <div class="flex items-center justify-center gap-1 mt-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 max-w-[80px]">
+                                <div id="stat-reputation" class="bg-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+                            </div>
+                            <span id="label-reputation" class="text-xs font-bold text-emerald-400">100</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">🧠 Mental Health</p>
+                        <div class="flex items-center justify-center gap-1 mt-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 max-w-[80px]">
+                                <div id="stat-mental" class="bg-indigo-500 h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+                            </div>
+                            <span id="label-mental" class="text-xs font-bold text-indigo-400">100</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-slate-400 uppercase font-semibold">🔒 Keamanan Data</p>
+                        <div class="flex items-center justify-center gap-1 mt-1">
+                            <div class="w-full bg-slate-800 rounded-full h-2 max-w-[80px]">
+                                <div id="stat-security" class="bg-amber-500 h-2 rounded-full transition-all duration-500" style="width: 100%"></div>
+                            </div>
+                            <span id="label-security" class="text-xs font-bold text-amber-400">100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scenario Display -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between text-xs text-indigo-400 font-bold uppercase tracking-wider">
+                        <span id="scenario-number">Kasus 1 dari 5</span>
+                        <span class="bg-indigo-950 px-2 py-1 rounded border border-indigo-800/40" id="scenario-tag">KEAMANAN DATA</span>
+                    </div>
+                    
+                    <!-- Scenario Card -->
+                    <div class="bg-slate-900/40 p-5 rounded-2xl border border-slate-800 min-h-[120px] flex flex-col justify-center">
+                        <p id="scenario-text" class="text-slate-200 font-medium text-base md:text-lg leading-relaxed">
+                            Memuat skenario seru...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Choices -->
+                <div id="choices-container" class="space-y-3">
+                    <!-- Dynamic Choices Buttons -->
+                </div>
+            </div>
+
+            <!-- FEEDBACK MODAL (INTEGRATED AS A SCREEN STATE) -->
+            <div id="screen-feedback" class="hidden space-y-6 text-center">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl" id="feedback-icon-container">
+                    <i class="fa-solid" id="feedback-icon"></i>
+                </div>
+                <div class="space-y-2">
+                    <h3 class="text-xl font-bold" id="feedback-title">Konsekuensi Keputusan</h3>
+                    <p class="text-slate-300 text-sm md:text-base max-w-md mx-auto leading-relaxed" id="feedback-desc">
+                        Penjelasan tentang dampak pilihanmu akan muncul di sini.
+                    </p>
+                </div>
+                
+                <!-- Stat changes list -->
+                <div class="max-w-xs mx-auto bg-slate-900/60 p-3 rounded-xl border border-slate-800 flex justify-around text-xs font-semibold" id="feedback-stat-changes">
+                    <!-- Dynamic stat changes indicators -->
+                </div>
+
+                <button onclick="nextStep()" class="w-full max-w-sm mx-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-2">
+                    Lanjutkan Simulasi <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- SCREEN 3: MINI-GAME HOAX BUSTER -->
+            <div id="screen-hoax" class="hidden space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs font-bold rounded-full border border-amber-500/20">MINI-GAME 1: HOAX BUSTER</span>
+                    <h3 class="text-2xl font-bold text-slate-100">Bisa Bedakan Hoaks atau Fakta?</h3>
+                    <p class="text-slate-400 text-xs">Awas terpapar berita palsu! Tentukan kebenaran info di bawah ini dengan cepat.</p>
+                </div>
+
+                <!-- Hoax Board -->
+                <div class="bg-slate-950/60 p-6 rounded-2xl border-2 border-slate-800 relative">
+                    <div class="absolute top-2 right-2 bg-indigo-950 text-indigo-400 border border-indigo-800/40 text-[10px] px-2 py-0.5 rounded font-bold">
+                        Skor: <span id="hoax-score">0</span>/5
+                    </div>
+                    <div class="text-xs text-slate-500 mb-2 font-bold uppercase">Berita Utama Hari Ini:</div>
+                    <p id="hoax-headline" class="text-slate-100 font-bold text-base md:text-lg italic text-center py-4">
+                        "Memuat Headline..."
+                    </p>
+                </div>
+
+                <!-- Hoax Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="answerHoax(false)" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 rounded-xl flex flex-col items-center justify-center gap-1 transition-all">
+                        <i class="fa-solid fa-circle-check text-xl"></i>
+                        <span>FAKTA</span>
+                    </button>
+                    <button onclick="answerHoax(true)" class="bg-rose-600 hover:bg-rose-500 text-white font-bold py-4 rounded-xl flex flex-col items-center justify-center gap-1 transition-all">
+                        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                        <span>HOAKS</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 4: DIGITAL FOOTPRINT SWEEPER -->
+            <div id="screen-footprint" class="hidden space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20">MINI-GAME 2: JEJAK DIGITAL SMK</span>
+                    <h3 class="text-2xl font-bold text-slate-100">Bersihkan Profil Sosmedmu!</h3>
+                    <p class="text-slate-400 text-xs">Kamu mau melamar Magang (PKL) di perusahaan besar. Hapus (Delete) postingan masa lalu yang merusak reputasimu, dan Pertahankan (Keep) yang aman!</p>
+                </div>
+
+                <!-- Simulated Post Card -->
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-lg">
+                    <div class="p-4 flex items-center justify-between border-b border-slate-800/60">
+                        <div class="flex items-center gap-2">
+                            <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 font-bold text-sm" id="post-avatar">
+                                NS
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold" id="post-user">Siswa SMK Baru</h4>
+                                <p class="text-[10px] text-slate-500">Diposting 2 tahun yang lalu • <i class="fa-solid fa-earth-americas"></i> Publik</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-semibold bg-slate-800 text-slate-400 px-2 py-1 rounded">Sisa Post: <span id="footprint-remaining">4</span></span>
+                    </div>
+                    
+                    <!-- Content Post -->
+                    <div class="p-6 text-center">
+                        <p id="post-content" class="text-slate-200 font-medium text-sm md:text-base italic">
+                            "Lagi malas sekolah nih, gurunya ngebosenin banget..."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button onclick="handlePostAction(true)" class="bg-rose-600/20 hover:bg-rose-600 text-rose-400 hover:text-white border border-rose-600/40 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-trash-can"></i> Hapus Post (Bahaya)
+                    </button>
+                    <button onclick="handlePostAction(false)" class="bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white border border-emerald-600/40 font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all">
+                        <i class="fa-solid fa-bookmark"></i> Biarkan (Aman)
+                    </button>
+                </div>
+            </div>
+
+            <!-- SCREEN 5: GAME OVER / RESULT & CERTIFICATE -->
+            <div id="screen-result" class="hidden space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 text-xs font-bold rounded-full border border-indigo-500/20">HASIL AKHIR SIMULASI</span>
+                    <h3 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-500">Evaluasi Karakter Digital</h3>
+                    <p class="text-slate-300 text-xs">Selamat, kamu berhasil menyelesaikan semua tantangan!</p>
+                </div>
+
+                <!-- Certificate Box (Visually Printable/Screenshotable) -->
+                <div class="bg-slate-900 border-2 border-dashed border-amber-500/50 p-6 rounded-2xl relative text-center space-y-4" id="certificate-box">
+                    <!-- Ribbon -->
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-500 text-slate-950 text-[10px] font-black px-4 py-1 rounded-full uppercase tracking-widest shadow-md">
+                        Sertifikat Kelulusan
+                    </div>
+
+                    <div class="pt-2 text-center">
+                        <i class="fa-solid fa-award text-amber-400 text-5xl animate-bounce"></i>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h4 class="text-xs text-slate-400 uppercase tracking-widest">Diberikan Kepada Siswa Baru SMK:</h4>
+                        <p class="text-xl font-bold text-slate-100" id="cert-name">[Nama Kamu]</p>
+                        <p class="text-xs text-indigo-400 font-semibold" id="cert-major">[Jurusan Kamu]</p>
+                    </div>
+
+                    <div class="border-t border-b border-slate-800 py-3 my-2 space-y-1">
+                        <p class="text-[10px] text-slate-400">Predikat Gelar Digital:</p>
+                        <p class="text-lg font-extrabold text-indigo-300" id="cert-title">Netizen Bijak & Profesional</p>
+                        <p class="text-xs text-slate-300 px-4" id="cert-desc">Mampu mengelola privasi, menyaring informasi palsu, dan menjaga nama baik diri sendiri maupun calon sekolah vokasi mereka di internet.</p>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 text-center pt-2">
+                        <div class="bg-slate-950 p-2 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">Jejak Digital</span>
+                            <span class="text-sm font-bold text-emerald-400" id="cert-reputation">100</span>
+                        </div>
+                        <div class="bg-slate-950 p-2 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">Kesehatan Mental</span>
+                            <span class="text-sm font-bold text-indigo-400" id="cert-mental">100</span>
+                        </div>
+                        <div class="bg-slate-950 p-2 rounded-xl">
+                            <span class="text-[10px] text-slate-500 block">Keamanan Data</span>
+                            <span class="text-sm font-bold text-amber-400" id="cert-security">100</span>
+                        </div>
+                    </div>
+
+                    <div class="text-[9px] text-slate-500 italic mt-3">
+                        Disertifikasi oleh Pemateri PLS SMK • Tanggal: 16 Juli 2026
+                    </div>
+                </div>
+
+                <!-- Footer Action Buttons -->
+                <div class="space-y-3">
+                    <button onclick="resetGame()" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-rotate-left"></i> Mulai Ulang Tantangan
+                    </button>
+                    <div class="text-center">
+                        <p class="text-xs text-slate-500">Tunjukkan sertifikat ini ke pemateri/panitia PLS untuk bukti kelulusan!</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Interaktif -->
+    <footer class="w-full max-w-4xl mx-auto px-4 text-center text-xs text-slate-500 space-y-1">
+        <p>&copy; 2026 Media Sosialisasi Bahaya Sosmed SMK. Semua Hak Dilindungi.</p>
+        <p>Gunakan teknologi dengan bijak untuk masa depan karir industri yang sukses!</p>
+    </footer>
+
+    <!-- Audio FX Synthesizer (Web Audio API - No assets required) -->
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                if (type === 'success') {
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, audioCtx.currentTime); // C5
+                    osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1); // E5
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.3);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, audioCtx.currentTime); // A3
+                    osc.frequency.setValueAtTime(180, audioCtx.currentTime + 0.1); 
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.4);
+                } else if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 0.1);
+                }
+            } catch (e) {
+                console.log("Audio not supported or interaction required first.");
+            }
+        }
+    </script>
+
+    <!-- GAMEPLAY JAVASCRIPT ENGINE -->
+    <script>
+        // Game States
+        let player = {
+            name: "",
+            major: "",
+            stats: {
+                reputation: 100,
+                mental: 100,
+                security: 100
+            }
+        };
+
+        let currentScenarioIndex = 0;
+        let currentHoaxIndex = 0;
+        let currentPostIndex = 0;
+        let hoaxScore = 0;
+
+        // Scenarios List (5 highly educational scenarios for SMK level)
+        const scenarios = [
+            {
+                tag: "PRIVASI & KEAMANAN",
+                text: "Kamu baru saja diterima di SMK impianmu. Di hari pertama PLS, kamu sangat bersemangat dan berfoto selfie memegang kartu tanda panitia MPLS yang memuat data NIK, Alamat, dan Barcode Siswa Baru. Kamu berniat mempostingnya di feed Instagram. Tindakanmu?",
+                choices: [
+                    {
+                        text: "Post saja langsung! Ini kan momen berharga sekali seumur hidup biar teman-teman lamaku tahu.",
+                        reputation: +10,
+                        mental: 0,
+                        security: -40,
+                        feedback: "Bahaya! Data sensitif seperti NIK, barcode kartu pelajar, dan alamat rumah sangat rawan disalahgunakan oleh pelaku kejahatan siber untuk penipuan digital atau pinjaman online ilegal atas namamu."
+                    },
+                    {
+                        text: "Sensor/coret dulu data penting seperti NIK dan alamat sebelum diunggah ke publik.",
+                        reputation: +10,
+                        mental: 0,
+                        security: +10,
+                        feedback: "Keputusan hebat! Berbagi kegembiraan boleh, tetapi melindungi privasi dan informasi rahasia adalah kebiasaan baik calon ahli IT & profesional masa depan."
+                    },
+                    {
+                        text: "Simpan fotonya hanya untuk status 'Close Friend' atau koleksi pribadi saja.",
+                        reputation: 0,
+                        mental: 0,
+                        security: +20,
+                        feedback: "Sangat bijak! Membatasi jangkauan audiens adalah salah satu tameng pertahanan terkuat dalam menjaga keamanan data pribadimu."
+                    }
+                ]
+            },
+            {
+                tag: "HOAKS & PINJOL ILEGAL",
+                text: "Kamu melihat sebuah postingan TikTok viral yang menawarkan 'Event Giveaway Spesial Siswa SMK Baru'. Syaratnya hanya mengklik link Google Form di bio dan mengisikan foto KTP orang tuamu untuk klaim hadiah iPhone 15 gratis. Sikapmu?",
+                choices: [
+                    {
+                        text: "Langsung isi form-nya! Kapan lagi bisa pamer punya iPhone baru di sekolah.",
+                        reputation: -10,
+                        mental: -20,
+                        security: -50,
+                        feedback: "Fatal! Itu adalah modus phishing pencurian identitas. Data KTP orang tuamu bisa dipakai sindikat kriminal untuk membobol rekening atau melakukan pinjaman online ilegal!"
+                    },
+                    {
+                        text: "Curiga, lalu mencoba mencari info kebenaran giveaway ini melalui akun resmi penyelenggara (tidak lewat link sembarangan).",
+                        reputation: +15,
+                        mental: 0,
+                        security: +10,
+                        feedback: "Luar biasa! Selalu verifikasi informasi dari akun resmi bercentang biru sebelum bertindak. Kamu terhindar dari jebakan penipuan siber."
+                    },
+                    {
+                        text: "Laporkan postingan tersebut sebagai penipuan (Report spam) di media sosial.",
+                        reputation: +20,
+                        mental: 0,
+                        security: +20,
+                        feedback: "Langkah pahlawan! Tidak hanya menyelamatkan diri sendiri, kamu juga melindungi ratusan siswa lain dari bahaya penipuan siber."
+                    }
+                ]
+            },
+            {
+                tag: "CYBERBULLYING",
+                text: "Di grup WhatsApp kelas baru, ada salah satu siswa yang sering mengirim pesan aneh karena belum paham cara pakai aplikasi. Beberapa teman sekelas mulai membully, mengirimkan stiker ejekan kasar, dan membagikan foto siswa tersebut yang diedit lucu secara berlebihan. Apa yang kamu lakukan?",
+                choices: [
+                    {
+                        text: "Kirim stiker ejekan juga biar dibilang asyik dan cepat akrab dengan geng sekelas.",
+                        reputation: -30,
+                        mental: -15,
+                        security: 0,
+                        feedback: "Sangat disayangkan. Ikut-ikutan merundung membuat reputasimu dinilai buruk. Jejak digital jelek ini bisa merusak masa depanmu di SMK jika guru mengetahuinya."
+                    },
+                    {
+                        text: "Beri tahu mereka secara sopan lewat chat personal grup untuk menghentikan ejekan, atau laporkan ke Wali Kelas/Guru BK.",
+                        reputation: +20,
+                        mental: +15,
+                        security: 0,
+                        feedback: "Bagus sekali! Karakter peduli sosial dan berani membela kebenaran adalah ciri pemimpin industri di masa depan. Lingkungan sekolah yang ramah dimulai dari kamu."
+                    },
+                    {
+                        text: "Diam saja (menyaksikan/silent reader) karena malas ikut campur urusan orang lain.",
+                        reputation: 0,
+                        mental: -10,
+                        security: 0,
+                        feedback: "Netral tapi kurang peduli. Pembiaran terhadap tindakan penindasan (cyberbullying) secara tidak langsung memperkuat iklim negatif di sekolah baru."
+                    }
+                ]
+            },
+            {
+                tag: "JEJAK DIGITAL",
+                text: "Kamu sedang kesal luar biasa karena dihukum terlambat oleh panitia MPLS. Kamu sangat ingin menulis kekesalanmu di status WhatsApp dan Instagram Story dengan menggunakan kata-kata kasar dan menandai (tag) akun resmi sekolah. Apakah kamu akan mengunggahnya?",
+                choices: [
+                    {
+                        text: "Upload langsung! Sosial media kan ruang bebas berekspresi untuk meluapkan amarah pribadi.",
+                        reputation: -40,
+                        mental: -10,
+                        security: 0,
+                        feedback: "Bencana! Ingat, perusahaan tempat magang/kerja di masa depan sering melacak jejak digital pelamar. Sikap emosional yang buruk dan tidak sopan di media sosial adalah alasan utama penolakan kerja."
+                    },
+                    {
+                        text: "Tulis di jurnal pribadi saja, lalu bicarakan langsung baik-baik dengan panitia atau guru jika ada aturan yang dirasa kurang adil.",
+                        reputation: +20,
+                        mental: +20,
+                        security: 0,
+                        feedback: "Pilihan brilian! Mengendalikan emosi adalah bentuk kedewasaan mental. Menyelesaikan masalah secara langsung jauh lebih efektif dibanding curhat di sosmed."
+                    },
+                    {
+                        text: "Hanya bagikan di status close friend dengan menggunakan kalimat satire (sindiran halus).",
+                        reputation: -15,
+                        mental: -5,
+                        security: 0,
+                        feedback: "Kurang aman. Ingat, teman terdekatmu bisa saja melakukan screenshot (tangkap layar) dan menyebarkannya kembali hingga menjadi viral. Tidak ada yang 100% rahasia di internet."
+                    }
+                ]
+            },
+            {
+                tag: "KECANDUAN SCREEN TIME",
+                text: "Sudah pukul 01:30 dini hari, padahal pagi harinya kamu harus datang tepat waktu pukul 06:30 untuk upacara pembukaan PLS. Namun, kamu sedang asyik menonton live stream game di TikTok dan mengobrol (chatting) di grup Discord baru. Apa yang kamu lakukan?",
+                choices: [
+                    {
+                        text: "Lanjut begadang sampai jam 3 pagi, toh sudah tanggung seru.",
+                        reputation: -10,
+                        mental: -35,
+                        security: 0,
+                        feedback: "Dampak buruk! Kurang tidur menyebabkan kamu tidak fokus di hari esok, mudah cemas, lelah mental, bahkan bisa terlambat datang sekolah baru dan dihukum."
+                    },
+                    {
+                        text: "Matikan HP segera, pasang alarm pagi hari, dan langsung tidur.",
+                        reputation: +10,
+                        mental: +30,
+                        security: 0,
+                        feedback: "Tepat sekali! Disiplin waktu dan menjaga kebugaran tubuh serta kesehatan mental jauh lebih berharga daripada hiburan sesaat di layar smartphone."
+                    }
+                ]
+            }
+        ];
+
+        // Hoax Buster Mini-Game Questions (Fakta / Hoaks)
+        const hoaxes = [
+            {
+                headline: "Kementerian Pendidikan membagikan kuota internet gratis 150GB untuk seluruh siswa baru SMK dengan mengklik link domain: kuota-gratis-kemendikbud.xyz",
+                isHoax: true,
+                feedback: "HOAKS! Kementerian resmi tidak pernah menggunakan domain asing/gratisan seperti '.xyz'. Domain resmi pemerintah selalu menggunakan '.go.id'."
+            },
+            {
+                headline: "Postingan di media sosial yang mengandung konten asusila, ujaran kebencian, atau pencemaran nama baik bisa dipidanakan dengan UU ITE.",
+                isHoax: false,
+                feedback: "FAKTA! UU Informasi dan Transaksi Elektronik (UU ITE) mengatur sanksi hukum berat bagi pelanggar etika di ruang digital Indonesia."
+            },
+            {
+                headline: "Susu kental manis yang dicampur madu dan disuntikkan ke tangan dapat melindungi tubuh dari paparan radiasi wifi gadget.",
+                isHoax: true,
+                feedback: "HOAKS PARAH! Ini adalah disinformasi kesehatan yang sangat tidak masuk akal dan sangat berbahaya jika dipraktikkan."
+            },
+            {
+                headline: "Situs pencarian kerja dan magang profesional seperti LinkedIn mengizinkan HRD melihat riwayat aktivitas postingan publik kamu.",
+                isHoax: false,
+                feedback: "FAKTA! LinkedIn dirancang agar para profesional saling memantau kredibilitas, etika berkomunikasi, dan portofolio kerja para anggotanya."
+            },
+            {
+                headline: "Menginstal aplikasi ilegal hasil modifikasi (MOD APK) yang diunduh di luar Google Play Store sangat rawan disisipi malware penyadap data perbankan.",
+                isHoax: false,
+                feedback: "FAKTA! File instalasi pihak ketiga yang tidak diverifikasi sering kali disisipi Trojan Horse untuk mencuri SMS OTP maupun password akun sosmed."
+            }
+        ];
+
+        // Digital Footprint Sweeper Game Questions (Keep / Delete)
+        const posts = [
+            {
+                user: "Rian_SMKOtomotif",
+                content: "Hari ini bolos sekolah numpang di warnet, untung guru piketnya gampang dibohongin wkwk 😜 #AntiSekolah",
+                shouldDelete: true,
+                feedback: "WAJIB DIHAPUS! Perusahaan industri tidak menyukai karakter pembohong, tidak disiplin, dan bangga melanggar aturan."
+            },
+            {
+                user: "Ahmad_TKJ_SMK",
+                content: "Alhamdulillah! Hari ini berhasil merakit PC pertama saya sendiri dan menginstal Linux Ubuntu. Siap belajar lebih dalam! 💻 #TKJSepanjangMasa",
+                shouldDelete: false,
+                feedback: "BAGUS! PERTAHANKAN. Postingan prestasi atau proses belajarmu akan sangat menarik perhatian recruiter saat kamu melamar magang industri nanti."
+            },
+            {
+                user: "Amel_DesignSMK",
+                content: "Woi si @Siti99 gausah sok pamer karya dkv deh, gambarmu kayak buatan anak TK jelek abis mending gausah masuk jurusan ini 🤮",
+                shouldDelete: true,
+                feedback: "WAJIB DIHAPUS! Postingan ini menunjukkan perilaku cyberbullying dan tidak dapat bekerja sama secara ramah di dalam tim profesional."
+            },
+            {
+                user: "Ratih_AKL_SMK",
+                content: "Selesai mengikuti seminar literasi keuangan digital bareng teman sekelas baru di MPLS. Banyak belajar soal kelola keuangan pribadi sejak muda!",
+                shouldDelete: false,
+                feedback: "BAGUS! PERTAHANKAN. Menunjukkan kamu adalah siswa yang aktif, produktif, dan haus akan ilmu pengetahuan baru."
+            }
+        ];
+
+        // START GAME TRIGGER
+        function startGame() {
+            const nameInput = document.getElementById('player-name').value.trim();
+            const majorInput = document.getElementById('player-major').value;
+
+            if (nameInput === "") {
+                playSound('error');
+                // Temporary non-alert custom popup indicator
+                document.getElementById('player-name').classList.add('border-rose-500', 'animate-bounce');
+                setTimeout(() => {
+                    document.getElementById('player-name').classList.remove('border-rose-500', 'animate-bounce');
+                }, 1500);
+                return;
+            }
+
+            playSound('success');
+            player.name = nameInput;
+            player.major = majorInput;
+
+            // Transition Screen
+            document.getElementById('screen-welcome').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+
+            renderScenario();
+        }
+
+        // RENDER SCENARIO ON SCREEN
+        function renderScenario() {
+            if (currentScenarioIndex < scenarios.length) {
+                const scenario = scenarios[currentScenarioIndex];
+                
+                // Update text
+                document.getElementById('scenario-number').innerText = `Kasus ${currentScenarioIndex + 1} dari ${scenarios.length}`;
+                document.getElementById('scenario-tag').innerText = scenario.tag;
+                document.getElementById('scenario-text').innerText = scenario.text;
+
+                // Render choices buttons
+                const container = document.getElementById('choices-container');
+                container.innerHTML = "";
+
+                scenario.choices.forEach((choice, index) => {
+                    const button = document.createElement('button');
+                    button.className = "w-full text-left bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 p-4 rounded-xl text-xs md:text-sm text-slate-300 font-medium transition-all transform hover:-translate-x-1 flex items-start gap-3 active:scale-[0.99]";
+                    button.innerHTML = `
+                        <span class="w-6 h-6 rounded-full bg-indigo-950 text-indigo-400 border border-indigo-800 flex items-center justify-center font-bold text-xs shrink-0">${String.fromCharCode(65 + index)}</span>
+                        <span>${choice.text}</span>
+                    `;
+                    button.onclick = () => selectChoice(choice);
+                    container.appendChild(button);
+                });
+            } else {
+                // Done with scenarios, proceed to Mini Game 1: Hoax Buster
+                transitionToHoaxGame();
+            }
+        }
+
+        // CHOOSE OPTION
+        function selectChoice(choice) {
+            playSound('click');
+            
+            // Apply consequences
+            player.stats.reputation = Math.max(0, Math.min(100, player.stats.reputation + choice.reputation));
+            player.stats.mental = Math.max(0, Math.min(100, player.stats.mental + choice.mental));
+            player.stats.security = Math.max(0, Math.min(100, player.stats.security + choice.security));
+
+            // Update stats bar
+            updateStatusBar();
+
+            // Display feedback screen
+            showFeedback(choice);
+        }
+
+        function updateStatusBar() {
+            // Update bar width and text
+            document.getElementById('stat-reputation').style.width = player.stats.reputation + '%';
+            document.getElementById('label-reputation').innerText = player.stats.reputation;
+            adjustStatColor('stat-reputation', 'label-reputation', player.stats.reputation);
+
+            document.getElementById('stat-mental').style.width = player.stats.mental + '%';
+            document.getElementById('label-mental').innerText = player.stats.mental;
+            adjustStatColor('stat-mental', 'label-mental', player.stats.mental);
+
+            document.getElementById('stat-security').style.width = player.stats.security + '%';
+            document.getElementById('label-security').innerText = player.stats.security;
+            adjustStatColor('stat-security', 'label-security', player.stats.security);
+        }
+
+        function adjustStatColor(elementId, labelId, value) {
+            const bar = document.getElementById(elementId);
+            const label = document.getElementById(labelId);
+            
+            if (value >= 70) {
+                bar.className = bar.className.replace(/bg-\w+-500/, "bg-emerald-500");
+                label.className = "text-xs font-bold text-emerald-400";
+            } else if (value >= 40) {
+                bar.className = bar.className.replace(/bg-\w+-500/, "bg-amber-500");
+                label.className = "text-xs font-bold text-amber-400";
+            } else {
+                bar.className = bar.className.replace(/bg-\w+-500/, "bg-rose-500");
+                label.className = "text-xs font-bold text-rose-400";
+            }
+        }
+
+        // SHOW FEEDBACK MODAL VIEW
+        function showFeedback(choice) {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-feedback').classList.remove('hidden');
+
+            const isGoodChoice = (choice.reputation >= 0 && choice.security >= 0 && choice.mental >= 0);
+            
+            const iconContainer = document.getElementById('feedback-icon-container');
+            const icon = document.getElementById('feedback-icon');
+            
+            if (isGoodChoice) {
+                playSound('success');
+                iconContainer.className = "w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30";
+                icon.className = "fa-solid fa-circle-check";
+                document.getElementById('feedback-title').innerText = "Keputusan Hebat!";
+                document.getElementById('feedback-title').className = "text-xl font-bold text-emerald-400";
+            } else {
+                playSound('error');
+                iconContainer.className = "w-16 h-16 rounded-full flex items-center justify-center mx-auto text-3xl bg-rose-500/10 text-rose-400 border border-rose-500/30";
+                icon.className = "fa-solid fa-circle-exclamation";
+                document.getElementById('feedback-title').innerText = "Waspada Dampak Buruk!";
+                document.getElementById('feedback-title').className = "text-xl font-bold text-rose-400";
+            }
+
+            document.getElementById('feedback-desc').innerText = choice.feedback;
+
+            // Render Stat Changes List
+            const changesList = document.getElementById('feedback-stat-changes');
+            changesList.innerHTML = "";
+
+            if (choice.reputation !== 0) {
+                changesList.innerHTML += `<div class="${choice.reputation > 0 ? 'text-emerald-400' : 'text-rose-400'}">Jejak Digital: ${choice.reputation > 0 ? '+' : ''}${choice.reputation}</div>`;
+            }
+            if (choice.mental !== 0) {
+                changesList.innerHTML += `<div class="${choice.mental > 0 ? 'text-emerald-400' : 'text-rose-400'}">Mental: ${choice.mental > 0 ? '+' : ''}${choice.mental}</div>`;
+            }
+            if (choice.security !== 0) {
+                changesList.innerHTML += `<div class="${choice.security > 0 ? 'text-emerald-400' : 'text-rose-400'}">Keamanan: ${choice.security > 0 ? '+' : ''}${choice.security}</div>`;
+            }
+            if (changesList.innerHTML === "") {
+                changesList.innerHTML = "<div class='text-slate-400'>Tidak ada perubahan statistik signifikan.</div>";
+            }
+        }
+
+        // GO TO NEXT SCENARIO
+        function nextStep() {
+            playSound('click');
+            document.getElementById('screen-feedback').classList.add('hidden');
+            document.getElementById('screen-game').classList.remove('hidden');
+            
+            currentScenarioIndex++;
+            renderScenario();
+        }
+
+        // TRANSITION TO HOAX GAME SCREEN
+        function transitionToHoaxGame() {
+            document.getElementById('screen-game').classList.add('hidden');
+            document.getElementById('screen-hoax').classList.remove('hidden');
+            renderHoaxQuestion();
+        }
+
+        function renderHoaxQuestion() {
+            if (currentHoaxIndex < hoaxes.length) {
+                const currentHoax = hoaxes[currentHoaxIndex];
+                document.getElementById('hoax-score').innerText = hoaxScore;
+                document.getElementById('hoax-headline').innerText = `"${currentHoax.headline}"`;
+            } else {
+                // Done with Hoax, move to footprint cleanup game
+                transitionToFootprintGame();
+            }
+        }
+
+        function answerHoax(playerGuessedHoax) {
+            const currentHoax = hoaxes[currentHoaxIndex];
+            const isCorrect = (playerGuessedHoax === currentHoax.isHoax);
+
+            if (isCorrect) {
+                playSound('success');
+                hoaxScore++;
+                player.stats.reputation = Math.min(100, player.stats.reputation + 5);
+            } else {
+                playSound('error');
+                player.stats.reputation = Math.max(0, player.stats.reputation - 10);
+            }
+
+            // Show custom informational message popup
+            showSubGameFeedback(isCorrect ? "Jawaban Benar!" : "Aduh, Kurang Tepat!", currentHoax.feedback, isCorrect, () => {
+                currentHoaxIndex++;
+                renderHoaxQuestion();
+            });
+        }
+
+        // TRANSITION TO FOOTPRINT CLEANER GAME
+        function transitionToFootprintGame() {
+            document.getElementById('screen-hoax').classList.add('hidden');
+            document.getElementById('screen-footprint').classList.remove('hidden');
+            renderPostContent();
+        }
+
+        function renderPostContent() {
+            if (currentPostIndex < posts.length) {
+                const currentPost = posts[currentPostIndex];
+                document.getElementById('footprint-remaining').innerText = posts.length - currentPostIndex;
+                document.getElementById('post-user').innerText = currentPost.user;
+                document.getElementById('post-content').innerText = `"${currentPost.content}"`;
+                
+                // Set custom avatar
+                document.getElementById('post-avatar').innerText = currentPost.user.substring(0,2).toUpperCase();
+            } else {
+                // End game and show results
+                showFinalResults();
+            }
+        }
+
+        function handlePostAction(playerWantsToDelete) {
+            const currentPost = posts[currentPostIndex];
+            // If post should be deleted and player deleted it -> Correct
+            // If post should NOT be deleted (is safe) and player kept it -> Correct
+            const isActionCorrect = (playerWantsToDelete === currentPost.shouldDelete);
+
+            if (isActionCorrect) {
+                playSound('success');
+                player.stats.reputation = Math.min(100, player.stats.reputation + 10);
+            } else {
+                playSound('error');
+                player.stats.reputation = Math.max(0, player.stats.reputation - 15);
+            }
+
+            const headerTitle = isActionCorrect ? "Pilihan Tepat!" : "Salah Langkah!";
+            showSubGameFeedback(headerTitle, currentPost.feedback, isActionCorrect, () => {
+                currentPostIndex++;
+                renderPostContent();
+            });
+        }
+
+        // GENERIC POPUP FOR MINI-GAMES INTERACTION
+        function showSubGameFeedback(title, text, isCorrect, callback) {
+            // Build simple modal on top of body
+            const modal = document.createElement('div');
+            modal.className = "fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 z-50 animate-fade-in";
+            modal.innerHTML = `
+                <div class="bg-slate-900 border ${isCorrect ? 'border-emerald-500/40' : 'border-rose-500/40'} max-w-md w-full p-6 rounded-2xl text-center space-y-4 shadow-xl">
+                    <div class="w-12 h-12 rounded-full ${isCorrect ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'} flex items-center justify-center mx-auto text-2xl">
+                        <i class="fa-solid ${isCorrect ? 'fa-thumbs-up' : 'fa-triangle-exclamation'}"></i>
+                    </div>
+                    <h4 class="text-lg font-bold ${isCorrect ? 'text-emerald-400' : 'text-rose-400'}">${title}</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed">${text}</p>
+                    <button id="modal-next-btn" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold py-3 rounded-xl transition-all">Lanjut</button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            document.getElementById('modal-next-btn').onclick = () => {
+                playSound('click');
+                document.body.removeChild(modal);
+                callback();
+            };
+        }
+
+        // FINAL SCREEN RESULTS
+        function showFinalResults() {
+            document.getElementById('screen-footprint').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+
+            document.getElementById('cert-name').innerText = player.name;
+            document.getElementById('cert-major').innerText = player.major;
+
+            // Display values
+            document.getElementById('cert-reputation').innerText = player.stats.reputation;
+            document.getElementById('cert-mental').innerText = player.stats.mental;
+            document.getElementById('cert-security').innerText = player.stats.security;
+
+            // Score evaluation
+            const averageScore = (player.stats.reputation + player.stats.mental + player.stats.security) / 3;
+            let title = "";
+            let desc = "";
+
+            if (averageScore >= 85) {
+                title = "🎖️ Netizen Duta Sosmed Aman";
+                desc = "Luar biasa! Kamu adalah netizen teladan kelas atas. Kamu memiliki kesadaran penuh akan pentingnya menjaga keamanan privasi, bijak merespons bully, dan proaktif dalam menyaring berita dari hoaks. SMK bangga memilikimu!";
+            } else if (averageScore >= 60) {
+                title = "🛡️ Netizen Bijak Berhati-hati";
+                desc = "Bagus sekali! Pemahaman sosmedmu sudah cukup mumpuni. Kamu mengerti dasar-dasar keselamatan siber dan pentingnya menghapus jejak digital buruk sebelum masuk dunia industri vokasi. Tingkatkan terus kewaspadaanmu!";
+            } else {
+                title = "⚠️ Pengguna Sosmed Berisiko Tinggi";
+                desc = "Waspada! Skor kamu menunjukkan kamu masih sangat rentan menjadi korban penipuan siber atau melakukan tindakan ceroboh yang mengancam reputasi digital masa depanmu. Jadikan momen MPLS ini untuk berubah lebih cerdas!";
+            }
+
+            document.getElementById('cert-title').innerText = title;
+            document.getElementById('cert-desc').innerText = desc;
+        }
+
+        // RESTART GAME
+        function resetGame() {
+            playSound('click');
+            player = {
+                name: "",
+                major: "",
+                stats: { reputation: 100, mental: 100, security: 100 }
+            };
+            currentScenarioIndex = 0;
+            currentHoaxIndex = 0;
+            currentPostIndex = 0;
+            hoaxScore = 0;
+
+            updateStatusBar();
+
+            document.getElementById('screen-result').classList.add('hidden');
+            document.getElementById('screen-welcome').classList.remove('hidden');
+            document.getElementById('player-name').value = "";
+        }
+    </script>
+
+</body>
+</html>
+
+```
